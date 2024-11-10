@@ -1,30 +1,51 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <component :is="layoutComponent">
+    <router-view />
+  </component>
 </template>
 
+<script>
+import HomeLayout from './views/HomePage.vue'
+import DoctorLayout from './views/DoctorPage.vue'
+
+export default  {
+  name: 'App',
+  components: {
+    HomeLayout,
+    DoctorLayout
+  },
+  computed: {
+    layoutComponent() {
+      // Return the layout based on the route meta or default to HomeLayout
+      return this.$route.meta.layout || 'HomeLayout';
+    }
+  },
+}
+</script>
+
 <style>
+body {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  font-family: "Poppins", sans-serif;
 }
 
-nav {
-  padding: 30px;
+html {
+  scroll-behavior: smooth;
 }
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
+/* @media (min-width: 768px) {
+  .main-content {
+    width: 750px;
+  }
 }
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
+@media (max-width:767px) {
+  .main-content {
+    width: 450px;
+  }
+} */
 </style>
