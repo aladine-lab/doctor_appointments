@@ -1,61 +1,65 @@
 <template>
-    <div class="head">
-      <h2 @click="goback">DO <br> CS</h2>
-      <font-awesome-icon icon="fa-regular fa-user" class="user"/>
-    </div>
-    <div class="content">
-
-      <div class="info" v-if="doctor && rend">
-        <img src="../assets/doc.png" alt="">
-        <h1>Dr.{{doctor.name}}</h1>
-        <p>Specialty : {{ doctor.specialty }}</p>
-        <p>{{ doctor.workstation }}</p>
-        <p style="font-size : 12px;"><font-awesome-icon icon="fa-regular fa-building" /> {{doctor.place }}</p>
-        <div class="rating">
-          <div class="ra">
-            <h3 style="color: #6B7280; font-size: 17px;">Rating</h3>
-            <p style="color: #6B7280; font-size: 49px;">4.3</p>
-            <div class="stars">
+  <div class="head">
+    <h2 @click="goback">DO <br> CS</h2>
+    <font-awesome-icon icon="fa-regular fa-user" class="user"/>
+  </div>
+  <div class="content">
+    <div class="info" v-if="doctor && rend">
+      <img src="../assets/doc.png" alt="">
+      <h1 v-if="doctor">Dr.{{doctor.name}}</h1>
+      <p v-if="doctor">Specialty : {{ doctor.specialty }}</p>
+      <p v-if="doctor">{{ doctor.workstation }}</p>
+      <p v-if="doctor" style="font-size : 12px;"><font-awesome-icon icon="fa-regular fa-building" /> {{doctor.place }}</p>
+      <div class="rating">
+        <div class="ra">
+          <h3 style="color: #6B7280; font-size: 17px;">Rating</h3>
+          <p style="color: #6B7280; font-size: 49px;">4.3</p>
+          <div class="stars">
             <font-awesome-icon icon="fa-solid fa-star" class="star"/>
             <font-awesome-icon icon="fa-solid fa-star" class="star"/>
             <font-awesome-icon icon="fa-solid fa-star" class="star"/>
             <font-awesome-icon icon="fa-solid fa-star" class="star"/>
             <font-awesome-icon icon="fa-regular fa-star" />
           </div>
-            <p style="color: #6B7280; font-size: 11px; margin: 0">40000</p>
-          </div>
-          <div class="por">
-            <div class="rat"><span>5</span> <div class="bar"> <span style="width: 80%;"></span></div></div>
-            <div class="rat"><span>4</span> <div class="bar"> <span style="width: 20%;"></span></div></div>
-            <div class="rat"><span>3</span> <div class="bar"> <span style="width: 30%;"></span></div></div>
-            <div class="rat"><span>2</span> <div class="bar"> <span style="width: 15%;"></span></div></div>
-            <div class="rat"><span>1</span> <div class="bar"> <span style="width: 5%;"></span></div></div>
-          </div>
+          <p style="color: #6B7280; font-size: 11px; margin: 0">40000</p>
+        </div>
+        <div class="por">
+          <div class="rat"><span>5</span> <div class="bar"> <span style="width: 80%;"></span></div></div>
+          <div class="rat"><span>4</span> <div class="bar"> <span style="width: 20%;"></span></div></div>
+          <div class="rat"><span>3</span> <div class="bar"> <span style="width: 30%;"></span></div></div>
+          <div class="rat"><span>2</span> <div class="bar"> <span style="width: 15%;"></span></div></div>
+          <div class="rat"><span>1</span> <div class="bar"> <span style="width: 5%;"></span></div></div>
         </div>
       </div>
-
-      <div v-else-if="doctor && !rend">rendez-vous</div>
-      <div v-else>Loading info...</div>
-
-      <button class="bt" @click="rendezVous">{{ rend ? 'Prender rendez-Voue' : 'Confirmer' }}</button>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    
-    data() { 
-      return {
-        doctor : null,
-        id : this.$route.params.id,
-        rend : true
+
+    <div v-else-if="doctor && !rend" style="margin-top: -85px;">
+      <rendezvous :doctorId="id" />
+    </div>
+    <div v-else>Loading info...</div>
+
+    <button class="bt" @click="rendezVous">{{ rend ? 'Prender rendez-Voue' : 'Confirmer' }}</button>
+  </div>
+</template>
+
+<script>
+import rendezvous from '../components/rendez.vue';
+export default {
+  data() { 
+    return {
+      doctor: null,
+      id: this.$route.params.id,
+      rend: true
     }
   },
-  mounted () {
+  components: {
+    rendezvous,   
+  },
+  mounted() {
     fetch("http://localhost:3000/doctors/" + this.id)
-    .then(res => res.json())
-    .then(data => this.doctor = data)
-    .catch(err => console.log("hello"));
+      .then(res => res.json())
+      .then(data => this.doctor = data)
+      .catch(err => console.log(err));
   },
   methods: {
     goback() {
@@ -182,4 +186,5 @@ button {
   background-color: #F3F4F6;
   border-radius: 40%;
 }
+
 </style>

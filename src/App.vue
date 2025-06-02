@@ -7,6 +7,7 @@
 <script>
 import HomeLayout from './views/HomePage.vue'
 import DoctorLayout from './views/DoctorPage.vue'
+// import RendezVousPage from './views/rendez.vue'
 
 export default  {
   name: 'App',
