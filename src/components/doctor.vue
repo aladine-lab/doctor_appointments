@@ -1,4 +1,5 @@
 <template>
+  <div class="main">
       <div v-for="doctor in doctors" :key="doctor.id" class="content">
         <router-link :to = "`/doctor/${doctor.id}`">
           <div class="doctor">
@@ -19,21 +20,32 @@
           </div>
         </router-link>
       </div>
+      </div>
   </template>
 
 <script>
+import doctorss from '../../data/doctors';
+
 export default {
   data() {
     return {
-        doctors: []
-    }
-    },
-    mounted () {
-    fetch("http://localhost:3000/doctors")
-    .then(res => res.json())
-    .then(data => this.doctors = data)
-    }
+      doctors: doctorss
+    };
+  }
 }
+
+// export default {
+//   data() {
+//     return {
+//         doctors: []
+//     }
+//     },
+//     mounted () {
+//     fetch("http://localhost:3000/doctors")
+//     .then(res => res.json())
+//     .then(data => this.doctors = data)
+//     }
+// }
 </script>
 
 <style scoped>
@@ -91,5 +103,20 @@ span {
     width: 78px;
     height: 78px;
     border-radius: 50%;
+}
+
+@media (min-width: 768px) {
+  .main {
+    padding: 0 60px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-gap: 40px;
+  }
+  .doctor {
+    border-radius: 15px;
+  }
+  .content {
+    border-bottom: none !important;
+  }
 }
 </style>

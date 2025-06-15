@@ -1,20 +1,21 @@
 <template>
   <header>
-    <div class="head">
-      <h2>DO <br> CS</h2>
-      <font-awesome-icon icon="fa-regular fa-user" class="user"/>
-    </div>
-    <h1>Let's find you a doctor</h1>
-    <div class="search">
-      <input type="search" placeholder="Search">
-      <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
-    </div>
+      <div class="head">
+        <h2>DO <br> CS</h2>
+        <font-awesome-icon icon="fa-regular fa-user" class="user"/>
+      </div>
+      <h1>Let's find you a doctor</h1>
+
+      <div class="search">
+        <input type="search" placeholder="Search">
+      </div>
   </header>
 </template>
 
 <style scoped>
 header {
   padding: 40px;
+  position: relative;
 }
 
 .head {
@@ -41,29 +42,48 @@ header h1 {
   margin: 20px 0 20px 0;
 }
 .search {
-position: relative;
-padding: 0;
+  position: relative;
+  padding: 0;
 }
 .search::before {
-    content: "\1F50D";
-    position: absolute;
-    font-weight: 900;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 14px;
+  content: "\1F50D";
+  position: absolute;
+  font-weight: 900;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
 }
 
 
 .search input {
-    border: 1px  #ccc;
-    border-radius: 10px;
-    padding: 15px 20px;
-    padding-left: 30px;
-    width: 100%;
-    transition: width 0.3s;
-    background-color: #F3F4F6;
-    font-size: 20px;
-    color: #6B7280;
+  border: 1px  #ccc;
+  border-radius: 10px;
+  padding: 15px 20px;
+  padding-left: 30px;
+  width: 100%;
+  transition: width 0.3s;
+  background-color: #F3F4F6;
+  font-size: 20px;
+  color: #6B7280;
+}
+@media (min-width: 768px) {
+  header {
+    padding-bottom:  0;
+    margin-bottom:  60px;
+    background-color: #1C7C96;
+  }
+  h1 {
+    text-align: center;
+    font-size: 25px !important;
+    margin: 0 !important;
+  }
+  h1 ,h2 {
+    color: white !important;
+    margin: 0;
+  }
+.search {
+  bottom: -25px ;
+}
 }
 </style>

@@ -1,6 +1,12 @@
 <template>
+  <div class="all">
+<div class="sidebar">
+  <h3>Similar</h3>
+  <doctor/>
+</div>
+<div class="contaire">
   <div class="head">
-    <h2 @click="goback">DO <br> CS</h2>
+    <h2><font-awesome-icon icon="fa-regular fa-arrow-alt-circle-left"/></h2>
     <font-awesome-icon icon="fa-regular fa-user" class="user"/>
   </div>
   <div class="content">
@@ -40,27 +46,34 @@
 
     <button class="bt" @click="rendezVous">{{ rend ? 'Prender rendez-Voue' : 'Confirmer' }}</button>
   </div>
+  </div>
+  </div>
 </template>
 
 <script>
 import rendezvous from '../components/rendez.vue';
+import doctor from '../components/doctor.vue';
+import doctors from '../../data/doctors'; 
+
 export default {
   data() { 
     return {
-      doctor: null,
+      doctor: doctors[this.$route.params.id - 1],
+      doctorId: null,
       id: this.$route.params.id,
       rend: true
-    }
+    };
   },
   components: {
-    rendezvous,   
+    rendezvous,
+    doctor
   },
-  mounted() {
-    fetch("http://localhost:3000/doctors/" + this.id)
-      .then(res => res.json())
-      .then(data => this.doctor = data)
-      .catch(err => console.log(err));
-  },
+  // mounted() {
+  //   fetch("http://localhost:3000/doctors/" + this.id)
+  //     .then(res => res.json())
+  //     .then(data => this.doctor = data)
+  //     .catch(err => console.log(err));
+  // },
   methods: {
     goback() {
       this.$router.go(-1);
@@ -186,5 +199,35 @@ button {
   background-color: #F3F4F6;
   border-radius: 40%;
 }
-
+ @media (min-width: 1200px) {
+  .all {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+  }
+  .contaire {
+    width: 70%;
+    margin-left: 30%;
+    overflow-y: auto;
+  }
+  .sidebar {
+    width: 30%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: #F3F4F6;
+    padding-top: 20px;
+  }
+  .head {
+    background-color: #0E7490 !important;
+  }
+  .head h2 {
+    color: white;
+  }
+  h3 {
+    text-align: center;
+    margin: 50px 0;
+  }
+ }
 </style>

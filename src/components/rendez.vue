@@ -73,6 +73,7 @@
   
   <script>
   import VueMeetingSelector from 'vue-meeting-selector';
+  import doctorss from '../../data/doctors';
   export default {
     props: {
     doctorId: {
@@ -82,15 +83,15 @@
     } , 
      data() { 
       return {
-        doctor : [],
+        doctor : doctorss[this.doctorId - 1] // Assuming doctorId starts from 1
     }
   },
-  mounted () {
-    fetch(`http://localhost:3000/doctors/${this.doctorId}`)
-    .then(res => res.json())
-    .then(data => this.doctor = data)
-    .catch(err => console.log(err));
-  },
+//   mounted () {
+//     fetch(`http://localhost:3000/doctors/${this.doctorId}`)
+//     .then(res => res.json())
+//     .then(data => this.doctor = data)
+//     .catch(err => console.log(err));
+//   },
 }
 </script>
 <style scoped>
