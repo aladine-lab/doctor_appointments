@@ -6,7 +6,7 @@
 </div>
 <div class="contaire">
   <div class="head">
-    <h2><font-awesome-icon icon="fa-regular fa-arrow-alt-circle-left"/></h2>
+    <h2 v-on:click="goback()"><font-awesome-icon icon="fa-regular fa-arrow-alt-circle-left"/></h2>
     <font-awesome-icon icon="fa-regular fa-user" class="user"/>
   </div>
   <div class="content">
